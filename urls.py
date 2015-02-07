@@ -3,7 +3,7 @@ from django.conf.urls import patterns, url
 from imagegallery import views
 
 urlpatterns = patterns('',
-    url(r'^testgallery/$', views.index, name = "test-gallery")
+    url(r'^testgallery/$', views.index, name = "test-gallery"),
     # ex: /gallery/15_wildcostume
     url(r'/gallery/^(?P<base_name>)', views.thumbnails, name='thumbnails'),
     # ex: /gallery/15_wildcostume/01

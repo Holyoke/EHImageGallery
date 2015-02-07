@@ -7,33 +7,39 @@ class ImageGallery(models.Model):
     base_name = models.CharField(max_length=50)
     image_count = models.IntegerField(default=0)
     created = models.DateTimeField(auto_now_add=True)
-    image_names = compile_images();
-    thumbnails = compile_images();
     
-    def compile_images(self):
+    def images_list(self):
+        result = []
         for x in range(0,image_count):
             if x < 10:
-                url = base_name + "0" + str(x) + ".jpg"
+                url = base_name + "0" + str(x)
             else:
-                url = base_name + str(x) + ".jpg"
+                url = base_name + str(x)
                 
-            self.image_names.append(url)
+            result << url
+        
+        return result
             
-    def compile_thumbnails(self):
+    def thumbnails_list(self):
+        result = []
         for x in range(0,image_count):
             if x < 10:
-                url = base_name + "0" + str(x) + "t.jpg"
+                url = base_name + "0" + str(x) + "t"
             else:
-                url = base_name + str(x) + "t.jpg"
+                url = base_name + str(x) + "t"
                 
-            self.thumbnails.append(url)
+            result << url
+        
+        return result
     
     def  __str__(self):
         return self.base_name
-        
+
+#not sure if this works
 class ImageGalleryAdmin(admin.ModelAdmin):
     search_fields = ["title"]
     list_display = ["__str__", "title","image_count", "base_name", "created"]
     list_filter = ["base_name"]
 
+# do i put this in the admin.py file?
 admin.site.register(ImageGallery, ImageGalleryAdmin)
